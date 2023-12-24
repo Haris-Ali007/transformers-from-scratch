@@ -27,9 +27,8 @@ def make_batches(ds):
 if __name__=="__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("epochs", default=10, help="Number of training epochs")
-    parser.add_argument("batch", default=64, help="Batch size")
-
+    parser.add_argument("--epochs", type=int, default=10, help="Number of training epochs")
+    parser.add_argument("--batch", type=int, default=64, help="Batch size")
 
     args = parser.parse_args()
     
@@ -100,7 +99,7 @@ if __name__=="__main__":
     transformer.compile(optimizer=optimizer,
                         loss=masked_loss,
                         metrics=[masked_accuracy])
-    transformer.fit(train_batches, epochs=1, validation_data=val_batches)
+    transformer.fit(train_batches, epochs=training_epochs, validation_data=val_batches)
 
 
 
