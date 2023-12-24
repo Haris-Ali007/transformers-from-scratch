@@ -1,9 +1,9 @@
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import tensorflow_text
-from utils import PositionalEmbeddings, masked_accuracy, masked_loss, CustomScheduler
+from utils import masked_accuracy, masked_loss, CustomScheduler
 from model import Transformer
-
+import argparse
 
 def prepare_batch(pt, en):
     pt = tokenizers.pt.tokenize(pt)
@@ -26,15 +26,24 @@ def make_batches(ds):
 
 if __name__=="__main__":
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("epochs", default=10, help="Number of training epochs")
+    parser.add_argument("batch", default=64, help="Batch size")
+
+
+    args = parser.parse_args()
+    
     ### CONFIGURATIONS
     MAX_TOKENS=128
     BUFFER_SIZE = 20000
-    BATCH_SIZE = 64
     num_layers=4
     d_model=128
     dff=512
     num_heads=8
     dropout_rate=0.1
+    BATCH_SIZE = args.batch
+    training_epochs = args.epochs
+    
 
     #### Downloading dataset
     examples, metadata = tfds.load('ted_hrlr_translate/pt_to_en',
