@@ -29,7 +29,7 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--epochs", type=int, default=10, help="Number of training epochs")
     parser.add_argument("--batch", type=int, default=64, help="Batch size")
-
+    parser.add_argument("--save_path", type=str, help="Save path for model")
     args = parser.parse_args()
     
     ### CONFIGURATIONS
@@ -42,7 +42,7 @@ if __name__=="__main__":
     dropout_rate=0.1
     BATCH_SIZE = args.batch
     training_epochs = args.epochs
-    
+    model_save_path = args.save_path
 
     #### Downloading dataset
     examples, metadata = tfds.load('ted_hrlr_translate/pt_to_en',
@@ -100,7 +100,8 @@ if __name__=="__main__":
                         loss=masked_loss,
                         metrics=[masked_accuracy])
     transformer.fit(train_batches, epochs=training_epochs, validation_data=val_batches)
-
+    tf.saved_model.save(transformer, export_dir=model_save_path)
+    
 
 
 
