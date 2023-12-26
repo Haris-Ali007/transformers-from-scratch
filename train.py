@@ -100,7 +100,7 @@ if __name__=="__main__":
                         loss=masked_loss,
                         metrics=[masked_accuracy])
     transformer.fit(train_batches, epochs=training_epochs, validation_data=val_batches)
-    tf.saved_model.save(transformer, export_dir=model_save_path)
+    transformer.save(model_save_path)
     
 
 
