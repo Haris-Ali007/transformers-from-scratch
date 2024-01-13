@@ -20,6 +20,7 @@ def positional_encoding_original(length, depth):
 #TODO-> implement with interleaving like original paper PE(sin,2i) PE(cos,2i+1)
 
 
+
 def masked_loss(label, pred):
     mask = label != 0
     loss_function = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction='none')

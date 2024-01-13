@@ -159,7 +159,7 @@ class Transformer(tf.keras.Model):
                              dropout_rate=dropout_rate,
                              vocab_size=input_vocab_size)
         
-        self.deocder= Decoder(num_layers=num_layers,
+        self.decoder= Decoder(num_layers=num_layers,
                              d_model=d_model,
                              dff=dff,
                              num_heads=num_heads,
