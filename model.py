@@ -171,7 +171,7 @@ class Transformer(tf.keras.Model):
     def call(self, inputs):
         context, x = inputs
         context = self.encoder(context)
-        x = self.deocder(x=x, context=context)
+        x = self.decoder(x=x, context=context)
         logits = self.final_layer(x)
 
         try:
